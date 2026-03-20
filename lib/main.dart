@@ -7,6 +7,7 @@ import 'screens/chatbot_screen.dart';
 import 'screens/result_screen.dart';
 import 'screens/history_screen.dart';
 import 'screens/profile_screen.dart';
+import 'screens/edit_profile_screen.dart';
 import 'screens/symptom_input_screen.dart';
 
 void main() {
@@ -19,7 +20,8 @@ class MyApp extends StatefulWidget {
   @override
   MyAppState createState() => MyAppState();
 
-  static MyAppState of(BuildContext context) => context.findAncestorStateOfType<MyAppState>()!;
+  static MyAppState of(BuildContext context) =>
+      context.findAncestorStateOfType<MyAppState>()!;
 }
 
 class MyAppState extends State<MyApp> {
@@ -39,15 +41,29 @@ class MyAppState extends State<MyApp> {
       title: 'Health AI',
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: primary, brightness: Brightness.light),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: primary,
+          brightness: Brightness.light,
+        ),
         scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(backgroundColor: primary, foregroundColor: Colors.white, elevation: 0),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: primary,
+          foregroundColor: Colors.white,
+          elevation: 0,
+        ),
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: primary, brightness: Brightness.dark),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: primary,
+          brightness: Brightness.dark,
+        ),
         scaffoldBackgroundColor: const Color(0xFF121212),
-        appBarTheme: const AppBarTheme(backgroundColor: primary, foregroundColor: Colors.white, elevation: 0),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: primary,
+          foregroundColor: Colors.white,
+          elevation: 0,
+        ),
       ),
       themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
       home: const SplashScreen(),
@@ -57,9 +73,11 @@ class MyAppState extends State<MyApp> {
         '/home': (context) => const HomeScreen(),
         '/chatbot': (context) => const ChatbotScreen(),
         '/symptom-input': (context) => const SymptomInputScreen(),
-        '/result': (context) => const ResultScreen(diagnosis: {}, confidence: 0.0),
+        '/result': (context) =>
+            const ResultScreen(diagnosis: {}, confidence: 0.0),
         '/history': (context) => const HistoryScreen(),
         '/profile': (context) => const ProfileScreen(),
+        '/edit-profile': (context) => const EditProfileScreen(),
       },
     );
   }

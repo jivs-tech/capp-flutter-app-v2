@@ -1,4 +1,5 @@
 ﻿import 'package:flutter/material.dart';
+import '../main.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -11,6 +12,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _dark = false;
   bool _push = true;
   bool _tips = true;
+  String _language = 'English';
+
+  void _switchDarkMode(bool value) {
+    setState(() {
+      _dark = value;
+    });
+    final appState = MyApp.of(context);
+    appState.setDarkMode(value);
+  }
+
+  void _chooseLanguage() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              title: const Text('English'),
+              onTap: () => setState(() {
+                _language = 'English';
+                Navigator.pop(context);
+              }),
+            ),
+            ListTile(
+              title: const Text('Spanish'),
+              onTap: () => setState(() {
+                _language = 'Spanish';
+                Navigator.pop(context);
+              }),
+            ),
+            ListTile(
+              title: const Text('Hindi'),
+              onTap: () => setState(() {
+                _language = 'Hindi';
+                Navigator.pop(context);
+              }),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,23 +129,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       title: const Text('Jiya Vyas'),
                       subtitle: const Text('jiya@example.com'),
-                      trailing: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFF0D9F83), Color(0xFF2BC3FF)],
+                      trailing: InkWell(
+                        onTap: () =>
+                            Navigator.pushNamed(context, '/edit-profile'),
+                        borderRadius: BorderRadius.circular(8),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 6,
                           ),
-                        ),
-                        child: const Text(
-                          'Edit',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            gradient: const LinearGradient(
+                              colors: [Color(0xFF0D9F83), Color(0xFF2BC3FF)],
+                            ),
+                          ),
+                          child: const Text(
+                            'Edit',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
                           ),
                         ),
                       ),
@@ -118,7 +167,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           title: const Text('Dark Mode'),
                           subtitle: const Text('Enable dark theme'),
                           value: _dark,
-                          onChanged: (v) => setState(() => _dark = v),
+                          onChanged: _switchDarkMode,
                         ),
                         const Divider(height: 0),
                         SwitchListTile(
@@ -145,8 +194,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: ListTile(
                       leading: const Icon(Icons.language),
                       title: const Text('Language'),
-                      subtitle: const Text('English'),
+                      subtitle: Text(_language),
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                      onTap: _chooseLanguage,
                     ),
                   ),
                   const SizedBox(height: 16),
