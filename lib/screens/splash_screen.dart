@@ -6,36 +6,20 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xFF2D6BFF), Color(0xFF00C6FF)],
-          ),
-        ),
+        decoration: const BoxDecoration(gradient: LinearGradient(colors: [Color(0xFF0D9F83), Color(0xFF22A8FF)])),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 60),
-                const Icon(Icons.health_and_safety, size: 90, color: Colors.white),
-                const SizedBox(height: 20),
-                const Text('Smart Health AI', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white)),
-                const SizedBox(height: 12),
-                const Text('Your personal health companion for symptom check and condition guidance.', textAlign: TextAlign.center, style: TextStyle(color: Colors.white70, fontSize: 16)),
-                const Spacer(),
-                ElevatedButton(
-                  onPressed: () => Navigator.pushReplacementNamed(context, '/login'),
-                  style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50), backgroundColor: Colors.white, foregroundColor: const Color(0xFF2D6BFF), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
-                  child: const Text('Get Started', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                ),
-                const SizedBox(height: 16),
-                TextButton(onPressed: () => Navigator.pushReplacementNamed(context, '/login'), child: const Text('Already have an account?', style: TextStyle(color: Colors.white70))),
-              ],
-            ),
+          child: Center(
+            child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              const Icon(Icons.health_and_safety, size: 84, color: Colors.white),
+              const SizedBox(height: 16),
+              const Text('Smart Health AI', style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 12),
+              const Text('Your personal health companion', style: TextStyle(color: Colors.white70, fontSize: 16)),
+              const SizedBox(height: 32),
+              ElevatedButton(onPressed: () => Navigator.pushReplacementNamed(context, '/login'), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: const Color(0xFF0D9F83), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)), padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 14)), child: const Text('Get Started', style: TextStyle(fontWeight: FontWeight.bold))),
+            ]),
           ),
         ),
       ),
