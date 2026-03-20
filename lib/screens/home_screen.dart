@@ -69,10 +69,10 @@ class HomeScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 gradient: const LinearGradient(
-                  colors: [Color(0xFF2D6BFF), Color(0xFF00C6FF)],
+                  colors: [Color(0xFF0D9F83), Color(0xFF22A8FF)],
                 ),
               ),
-              padding: const EdgeInsets.all(18),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -89,28 +89,31 @@ class HomeScreen extends StatelessWidget {
                     'How are you feeling today?',
                     style: TextStyle(color: Colors.white70),
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 12),
                   ElevatedButton(
                     onPressed: () =>
                         Navigator.pushNamed(context, '/symptom-input'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      foregroundColor: const Color(0xFF2D6BFF),
+                      foregroundColor: const Color(0xFF0D9F83),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14),
                       ),
                     ),
-                    child: const Text('Start Symptom Check'),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 14),
+                      child: Text('Start Symptom Check'),
+                    ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 18),
             const Text(
               'Quick Actions',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             _card(
               context,
               Icons.chat_bubble,
@@ -133,6 +136,14 @@ class HomeScreen extends StatelessWidget {
               'Health Tips',
               'Daily wellness guidance',
               () {},
+            ),
+            const SizedBox(height: 8),
+            _card(
+              context,
+              Icons.person,
+              'Profile',
+              'Manage account details',
+              () => Navigator.pushNamed(context, '/profile'),
             ),
           ],
         ),

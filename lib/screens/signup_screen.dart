@@ -34,32 +34,47 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F7FF),
-      appBar: AppBar(backgroundColor: Colors.white, foregroundColor: Colors.black, elevation: 0, title: const Text('Create Account', style: TextStyle(color: Color(0xFF1D2C48)))),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(18),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            const Text('Join us today', style: TextStyle(fontSize: 16, color: Color(0xFF4D5E73))),
-            const SizedBox(height: 14),
-            Container(
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(18), boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12)]),
-              padding: const EdgeInsets.all(16),
-              child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-                TextFormField(controller: _name, decoration: const InputDecoration(hintText: 'Enter your name', prefixIcon: Icon(Icons.person_outline), filled: true, fillColor: Color(0xFFF5F7FF), border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12)), borderSide: BorderSide.none))),
-                const SizedBox(height: 10),
-                TextFormField(controller: _email, decoration: const InputDecoration(hintText: 'Enter your email', prefixIcon: Icon(Icons.email_outlined), filled: true, fillColor: Color(0xFFF5F7FF), border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12)), borderSide: BorderSide.none))),
-                const SizedBox(height: 10),
-                TextFormField(controller: _pass, obscureText: _hide, decoration: InputDecoration(hintText: 'Create password', prefixIcon: const Icon(Icons.lock_outline), filled: true, fillColor: const Color(0xFFF5F7FF), border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12)), borderSide: BorderSide.none), suffixIcon: IconButton(icon: Icon(_hide ? Icons.visibility_off : Icons.visibility), onPressed: () => setState(() => _hide = !_hide)))),
-                const SizedBox(height: 10),
-                TextFormField(controller: _confirm, obscureText: _hide, decoration: const InputDecoration(hintText: 'Confirm password', prefixIcon: Icon(Icons.lock_outline), filled: true, fillColor: Color(0xFFF5F7FF), border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12)), borderSide: BorderSide.none))),
-                const SizedBox(height: 10),
-                Row(children: [Checkbox(value: _agree, onChanged: (v) => setState(() => _agree = v ?? false)), const Expanded(child: Text('By signing up, you agree to our Terms', style: TextStyle(fontSize: 12, color: Color(0xFF6B768B))))]),
-                const SizedBox(height: 8),
-                Container(decoration: BoxDecoration(gradient: const LinearGradient(colors: [Color(0xFF1BBC9C), Color(0xFF11A5FF)]), borderRadius: BorderRadius.circular(12)), height: 50, child: ElevatedButton(onPressed: _submit, style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shadowColor: Colors.transparent), child: const Text('Create Account', style: TextStyle(fontWeight: FontWeight.bold)))),
-              ]),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFF0D9F83), Color(0xFF22A8FF)],
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Create Account', style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 6),
+                const Text('Join us today', style: TextStyle(color: Colors.white70)),
+                const SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(18), boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 12)]),
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      TextFormField(controller: _name, decoration: const InputDecoration(hintText: 'Enter your name', prefixIcon: Icon(Icons.person_outline), filled: true, fillColor: Color(0xFFF5F7FF), border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12)), borderSide: BorderSide.none))),
+                      const SizedBox(height: 10),
+                      TextFormField(controller: _email, decoration: const InputDecoration(hintText: 'Enter your email', prefixIcon: Icon(Icons.email_outlined), filled: true, fillColor: Color(0xFFF5F7FF), border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12)), borderSide: BorderSide.none))),
+                      const SizedBox(height: 10),
+                      TextFormField(controller: _pass, obscureText: _hide, decoration: InputDecoration(hintText: 'Create password', prefixIcon: const Icon(Icons.lock_outline), filled: true, fillColor: const Color(0xFFF5F7FF), border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12)), borderSide: BorderSide.none), suffixIcon: IconButton(icon: Icon(_hide ? Icons.visibility_off : Icons.visibility), onPressed: () => setState(() => _hide = !_hide)))),
+                      const SizedBox(height: 10),
+                      TextFormField(controller: _confirm, obscureText: _hide, decoration: const InputDecoration(hintText: 'Confirm password', prefixIcon: Icon(Icons.lock_outline), filled: true, fillColor: Color(0xFFF5F7FF), border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12)), borderSide: BorderSide.none))),
+                      const SizedBox(height: 10),
+                      Row(children: [Checkbox(value: _agree, onChanged: (v) => setState(() => _agree = v ?? false)), const Expanded(child: Text('By signing up, you agree to our Terms', style: TextStyle(fontSize: 12, color: Color(0xFF6B768B))))]),
+                      const SizedBox(height: 8),
+                      Container(decoration: BoxDecoration(gradient: const LinearGradient(colors: [Color(0xFF1BBC9C), Color(0xFF11A5FF)]), borderRadius: BorderRadius.circular(12)), height: 50, child: ElevatedButton(onPressed: _submit, style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shadowColor: Colors.transparent), child: const Text('Create Account', style: TextStyle(fontWeight: FontWeight.bold)))),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ]),
+          ),
         ),
       ),
     );
