@@ -1,196 +1,141 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
+  Widget _card(
+    BuildContext context,
+    IconData icon,
+    String title,
+    String subtitle,
+    VoidCallback onTap,
+  ) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(14),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: [BoxShadow(color: const Color(0x0D000000), blurRadius: 8)],
+        ),
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: const Color(0xFF2D6BFF),
+              child: Icon(icon, color: Colors.white, size: 20),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(subtitle, style: const TextStyle(color: Colors.grey)),
+                ],
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFF00BCD4), Color(0xFF00ACC1)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(32),
-                bottomRight: Radius.circular(32),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'How are you feeling?',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.notifications,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/symptom-input');
-                  },
-                  icon: const Icon(Icons.medical_services),
-                  label: const Text('Start Symptom Check'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: const Color(0xFF00BCD4),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 12,
-                      horizontal: 16,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _smallInfoCard('Recent Reports', Icons.history, () {
-                      Navigator.of(context).pushNamed('/history');
-                    }),
-                    _smallInfoCard('Health Tip', Icons.lightbulb, () {}),
-                  ],
-                ),
-              ],
-            ),
+      appBar: AppBar(
+        title: const Text('Health Dashboard'),
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.pushNamed(context, '/profile'),
+            icon: const Icon(Icons.person),
           ),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24),
+        ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF2D6BFF), Color(0xFF00C6FF)],
+                ),
+              ),
+              padding: const EdgeInsets.all(18),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Features',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    'Hello, Jiya',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  const SizedBox(height: 16),
-                  _buildFeatureCard(
-                    icon: Icons.chat_bubble,
-                    title: 'AI Health Assistant',
-                    description: 'Chat with our AI bot',
-                    onTap: () {
-                      Navigator.of(context).pushNamed('/chatbot');
-                    },
+                  const SizedBox(height: 6),
+                  const Text(
+                    'How are you feeling today?',
+                    style: TextStyle(color: Colors.white70),
                   ),
-                  const SizedBox(height: 12),
-                  _buildFeatureCard(
-                    icon: Icons.history,
-                    title: 'Health History',
-                    description: 'View past check-ups',
-                    onTap: () {
-                      Navigator.of(context).pushNamed('/history');
-                    },
-                  ),
-                  const SizedBox(height: 12),
-                  _buildFeatureCard(
-                    icon: Icons.info,
-                    title: 'Health Tips',
-                    description: 'Get wellness advice',
-                    onTap: () {},
+                  const SizedBox(height: 14),
+                  ElevatedButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, '/symptom-input'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: const Color(0xFF2D6BFF),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                    ),
+                    child: const Text('Start Symptom Check'),
                   ),
                 ],
               ),
             ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-          if (index == 2) {
-            Navigator.of(context).pushNamed('/profile');
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-      ),
-    );
-  }
-
-  Widget _smallInfoCard(String title, IconData icon, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 120,
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 6,
-              offset: const Offset(0, 2),
+            const SizedBox(height: 16),
+            const Text(
+              'Quick Actions',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
-          ],
-        ),
-        child: Column(
-          children: [
-            Icon(icon, color: const Color(0xFF00BCD4)),
             const SizedBox(height: 8),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 12),
+            _card(
+              context,
+              Icons.chat_bubble,
+              'AI Chatbot',
+              'Talk to AI assistant',
+              () => Navigator.pushNamed(context, '/chatbot'),
+            ),
+            const SizedBox(height: 8),
+            _card(
+              context,
+              Icons.list_alt,
+              'History',
+              'View your diagnosis records',
+              () => Navigator.pushNamed(context, '/history'),
+            ),
+            const SizedBox(height: 8),
+            _card(
+              context,
+              Icons.health_and_safety,
+              'Health Tips',
+              'Daily wellness guidance',
+              () {},
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildFeatureCard({
-    required IconData icon,
-    required String title,
-    required String description,
-    required VoidCallback onTap,
-  }) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: ListTile(
-        leading: Icon(icon, color: const Color(0xFF00BCD4), size: 32),
-        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: Text(description),
-        trailing: const Icon(Icons.arrow_forward),
-        onTap: onTap,
       ),
     );
   }

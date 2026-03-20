@@ -1,22 +1,7 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      if (mounted) {
-        Navigator.of(context).pushReplacementNamed('/login');
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,63 +9,33 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFF00BCD4), Color(0xFF00ACC1)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFF2D6BFF), Color(0xFF00C6FF)],
           ),
         ),
         child: SafeArea(
-          child: Stack(
-            children: [
-              const Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.health_and_safety,
-                      size: 80,
-                      color: Colors.white,
-                    ),
-                    SizedBox(height: 24),
-                    Text(
-                      'AI Health Assistant',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Your Personal Health Companion',
-                      style: TextStyle(fontSize: 16, color: Colors.white70),
-                    ),
-                  ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 60),
+                const Icon(Icons.health_and_safety, size: 90, color: Colors.white),
+                const SizedBox(height: 20),
+                const Text('Smart Health AI', textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white)),
+                const SizedBox(height: 12),
+                const Text('Your personal health companion for symptom check and condition guidance.', textAlign: TextAlign.center, style: TextStyle(color: Colors.white70, fontSize: 16)),
+                const Spacer(),
+                ElevatedButton(
+                  onPressed: () => Navigator.pushReplacementNamed(context, '/login'),
+                  style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50), backgroundColor: Colors.white, foregroundColor: const Color(0xFF2D6BFF), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                  child: const Text('Get Started', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                 ),
-              ),
-              Positioned(
-                left: 24,
-                right: 24,
-                bottom: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacementNamed('/login');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: const Color(0xFF00BCD4),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  child: const Text(
-                    'Get Started',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            ],
+                const SizedBox(height: 16),
+                TextButton(onPressed: () => Navigator.pushReplacementNamed(context, '/login'), child: const Text('Already have an account?', style: TextStyle(color: Colors.white70))),
+              ],
+            ),
           ),
         ),
       ),
