@@ -1,5 +1,7 @@
 ﻿import 'package:flutter/material.dart';
 
+const kGradientColors = [Color(0xFF0D9F83), Color(0xFF0D72FF), Color(0xFF2BC3FF)];
+
 class ChatbotScreen extends StatefulWidget {
   const ChatbotScreen({super.key});
 
@@ -27,18 +29,23 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('AI Health Assistant'),
+        elevation: 0,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF0B6CFF), Color(0xFF0F8DFF), Color(0xFF2BC3FF)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: kGradientColors),
           ),
         ),
       ),
       body: Column(
         children: [
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(12),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: kGradientColors),
+            ),
+            child: const Text('System Checker', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+          ),
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.all(12),
@@ -53,15 +60,12 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       gradient: isUser
-                          ? const LinearGradient(colors: [Color(0xFF08D4FF), Color(0xFF0D9FFF)])
+                          ? const LinearGradient(colors: [Color(0xFF0D9F83), Color(0xFF0D72FF), Color(0xFF2BC3FF)], begin: Alignment.topLeft, end: Alignment.bottomRight)
                           : const LinearGradient(colors: [Color(0xFFF3F7FF), Color(0xFFE8EEFF)]),
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 6, offset: const Offset(0, 2))],
                     ),
-                    child: Text(
-                      m['text'],
-                      style: TextStyle(color: isUser ? Colors.white : Colors.black87),
-                    ),
+                    child: Text(m['text'], style: TextStyle(color: isUser ? Colors.white : Colors.black87)),
                   ),
                 );
               },
@@ -83,7 +87,6 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
                       filled: true,
                       fillColor: const Color(0xFFF4F7FB),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                     ),
                   ),
                 ),
@@ -91,12 +94,9 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                 Container(
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    gradient: LinearGradient(colors: [Color(0xFF0B6CFF), Color(0xFF2BC3FF)]),
+                    gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: kGradientColors),
                   ),
-                  child: IconButton(
-                    onPressed: _send,
-                    icon: const Icon(Icons.send, color: Colors.white),
-                  ),
+                  child: IconButton(onPressed: _send, icon: const Icon(Icons.send, color: Colors.white)),
                 ),
               ],
             ),
