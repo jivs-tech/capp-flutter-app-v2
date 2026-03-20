@@ -42,12 +42,49 @@ class _SymptomInputScreenState extends State<SymptomInputScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Symptom Checker')),
+      appBar: AppBar(
+        title: const Text('Symptom Checker'),
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF0D9F83), Color(0xFF0D72FF), Color(0xFF2BC3FF)],
+            ),
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0xFF0D9F83),
+                    Color(0xFF0D72FF),
+                    Color(0xFF2BC3FF),
+                  ],
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+              ),
+              child: const Text(
+                'System Checker',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
             const Text(
               'Select your symptoms',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -58,13 +95,22 @@ class _SymptomInputScreenState extends State<SymptomInputScreen> {
               runSpacing: 8,
               children: _allSymptoms.map((symptom) {
                 final selected = _selected.contains(symptom);
-                return FilterChip(
-                  label: Text(symptom),
+                return ChoiceChip(
+                  label: Text(
+                    symptom,
+                    style: TextStyle(
+                      color: selected ? Colors.white : Colors.black87,
+                    ),
+                  ),
                   selected: selected,
-                  selectedColor: const Color(0xFF2D6BFF),
+                  selectedColor: const Color(0xFF0D9F83),
+                  backgroundColor: const Color(0xFFECF4FF),
                   onSelected: (v) => setState(
                     () =>
                         v ? _selected.add(symptom) : _selected.remove(symptom),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 );
               }).toList(),
@@ -81,21 +127,44 @@ class _SymptomInputScreenState extends State<SymptomInputScreen> {
                   : _selected.join(', '),
             ),
             const Spacer(),
-            ElevatedButton(
-              onPressed: _loading ? null : _submit,
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(50),
+            Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0xFF0D9F83),
+                    Color(0xFF0D72FF),
+                    Color(0xFF2BC3FF),
+                  ],
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(12)),
               ),
-              child: _loading
-                  ? const SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
-                        strokeWidth: 2,
+              child: ElevatedButton(
+                onPressed: _loading ? null : _submit,
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(50),
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                ),
+                child: _loading
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : const Text(
+                        'Analyze Symptoms',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
                       ),
-                    )
-                  : const Text('Analyze Symptoms'),
+              ),
             ),
           ],
         ),
